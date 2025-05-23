@@ -1,10 +1,17 @@
 Cypress.Commands.add('loginMailfence', () => {
-    const email = Cypress.env('email');
-    const password = Cypress.env('password');
+  cy.visit('https://mailfence.com');
+  cy.get('#signin').click();
+  cy.get('#UserID').type(Cypress.env('email'));
+  cy.get('#Password').type(Cypress.env('password'));
+  cy.contains('Enter').click();
+});
+
+Cypress.Commands.add("dragAndDrop", { prevSubject: "element" }, (subject, targetEl) => {
+  cy.wrap(subject)
+      .trigger("mousedown", { button: 0 })
+      .trigger("mousemove", { clientX: 100, clientY: 100 });
   
-    cy.visit('/');
-    cy.get('input[name="username"]').type(email);
-    cy.get('input[name="password"]').type(password);
-    cy.get('button[type="submit"]').click();
-  });
-  
+  cy.get(targetEl)
+      .trigger("mousemove", { clientX: 100, clientY: 100 })
+      .trigger("mouseup", { force: true });
+});

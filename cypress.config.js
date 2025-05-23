@@ -9,5 +9,8 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: 'https://mailfence.com'
-  }
+  },
+  experimentalStudio: true,
+  viewportWidth: 2560,
+  viewportHeight: 1440,
 });
